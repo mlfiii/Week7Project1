@@ -20,3 +20,5 @@ const getHeadlines = (params) => {
 
   return $.ajax(settings);
 }
+
+console.log(getHeadlines({category: 'entertainment'}))
