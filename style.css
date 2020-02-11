@@ -1,0 +1,37 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+}   
+
+.input-field i, .input-field label {
+    color: white!important;
+}
+
+.input-field textarea  {
+    border-bottom: 1px solid white!important;
+}
+body {
+    background-image: url("Images/NewsBackround.jpg");
+    background-color: #cccccc;
+   }
+
+   .responsive-img {
+       margin-top: 150px;
+       border: rgb(55, 32, 109) thin solid;
+       box-shadow: 10px 10px;
+   }
+
+   #searchbox {
+      color: white; 
+      width: 100%;
+      
+   }
+
+   #searchbutton {
+       background-color:rgb(67, 129, 211);
+       border: rgb(217, 177, 238) thin solid;
+       border-radius: 5%;
+    }
