@@ -33,4 +33,5 @@ body {
    #searchbutton {
        background-color:rgb(67, 129, 211);
        border: rgb(217, 177, 238) thin solid;
+       border-radius: 5%;
     }
