@@ -1,3 +1,26 @@
-/* div { */
-  /* background-image: url('Images/'); */
-/* } */
+*{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+}   
+
+body {
+    background-image: url("Images/NewsBackround.jpg");
+    background-color: #cccccc;
+   }
+
+   .responsive-img {
+       margin-top: 200px;
+       border: grey thick solid;
+   }
+
+   #searchbox {
+      color: white; 
+      width: 100%;
+   }
+
+   #searchbutton {
+       background-color:rgb(32, 63, 73);
+       border-radius: 24px;
+   }
