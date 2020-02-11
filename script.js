@@ -1,5 +1,5 @@
 
-getEverything({q: 'pole vault'}).then((response) => {
+getEverything({q: 'pole vault', source: 'CNN'}).then((response) => {
   const { articles } = response;
   const { url } = articles[0];
   console.log({url, googleResults: response})
