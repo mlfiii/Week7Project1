@@ -10,42 +10,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <!--sylesheet-->
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel='icon' href='images/news_s.ico' type='image/x-icon' />
   <title>The Stand</title>
 </head>
+
 <body>
-
-  <!-- test -->
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col s1">1</div>
-      <div class="col s1">2</div>
-      <div class="col s1">3</div>
-      <div class="col s1">4</div>
-      <div class="col s1">5</div>
-      <div class="col s1">6</div>
-      <div class="col s1">7</div>
-      <div class="col s1">8</div>
-      <div class="col s1">9</div>
-      <div class="col s1">10</div>
-      <div class="col s1">11</div>
-      <div class="col s1">12</div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col s1">1</div>
-    <div class="col s1">2</div>
-    <div class="col s1">3</div>
-    <div class="col s1">4</div>
-    <div class="col s1">5</div>
-    <div class="col s1">6</div>
-    <div class="col s1">7</div>
-    <div class="col s1">8</div>
-    <div class="col s1">9</div>
-    <div class="col s1">10</div>
-    <div class="col s1">11</div>
-    <div class="col s1">12</div>
-  </div> -->
+  <!-- <div class="row">
+        <div class="col s1">1</div>
+        <div class="col s1">2</div>
+        <div class="col s1">3</div>
+        <div class="col s1">4</div>
+        <div class="col s1">5</div>
+        <div class="col s1">6</div>
+        <div class="col s1">7</div>
+        <div class="col s1">8</div>
+        <div class="col s1">9</div>
+        <div class="col s1">10</div>
+        <div class="col s1">11</div>
+        <div class="col s1">12</div>
+    </div> -->
 
   <!--center image-->
   <div class="container">
@@ -54,7 +37,6 @@
         <img class="responsive-img" src="Images/NewsLayout.jpg" height="auto" width="100%">
       </div>
     </div>
-  </div>
 
   <!--input bar-->
   <div class="container">
@@ -66,21 +48,21 @@
             <textarea id="searchbox" class="materialize-textarea"></textarea>
             <label for="searchbox">Search</label>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-  
 
-  <!--search button-->
-  <div class="container">
-    <div class="row">
-      <a class="col S2 waves-effect waves-light btn offset-m5" id="searchbutton"><i class="material-icons left">search</i>Search</a>
+
+    <!--search button-->
+    <div class="container">
+      <div class="row">
+        <a class="col S2 waves-effect waves-light btn offset-m5" id="searchbutton"><i
+            class="material-icons left">search</i>Search</a>
+      </div>
     </div>
-  </div>
 
-   <!--displayed results-->
-   <!-- <div class="container">
+    <!--displayed results-->
+    <!-- <div class="container">
     <div class="row">
       <div class="col s12 offset-m3">
         <div class="index" ><H1>Top Articles</H1></div>
@@ -98,13 +80,14 @@
     </div>
   </div> -->
 
-  <!-- Compiled and minified JavaScript for Materialize -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript for Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-  <!-- Our backend scripts -->
-  <script src="./newsapi.js"></script>
+    <!-- Our backend scripts -->
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

@@ -23,11 +23,3 @@ const getHeadlines = (params) => {
 
 console.log(getHeadlines({category: 'entertainment'}));
 
-var searchBox = document.getElementById("searchbox");
-var searchButton = document.getElementById ("searchbutton");
-
-$(searchButton).click(function(){
-  let input = document.getElementById("searchbox").value;
-  //CONSOLE LOG
-  console.log ('Input value: ', input);
-});
