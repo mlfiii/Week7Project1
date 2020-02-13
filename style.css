@@ -16,6 +16,7 @@
 body {
     background-image: url("Images/NewsBackround.jpg");
     background-color: #cccccc;
+    background-attachment: fixed;
    }
 
    .responsive-img {
