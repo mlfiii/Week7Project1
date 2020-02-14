@@ -35,3 +35,8 @@ body {
        border: rgb(217, 177, 238) thin solid;
        border-radius: 5%;
     }
+
+    #headline-results{
+
+        color: white;
+    }
