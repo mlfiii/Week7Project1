@@ -1,20 +1,20 @@
-// test area --- not part of final product
-getEverything({q: 'pole vault', source: 'CNN'}).then((response) => {
-  const { articles } = response;
+// // test area --- not part of final product
+// getEverything({q: 'pole vault', source: 'CNN'}).then((response) => {
+//   const { articles } = response;
 
-  // var articles = response.articles;
-  const { url } = articles[0];
+//   // var articles = response.articles;
+//   const { url } = articles[0];
 
-  // var url = articles[0].url;
-  // console.log({ url, googleResponse: response })
-  renderTitles(articles)
+//   // var url = articles[0].url;
+//   // console.log({ url, googleResponse: response })
+//   renderTitles(articles)
 
-  return getAnalysis({ url });
-}).then((response) => {
-  console.log(response);
-}).catch(error => {
-  renderError(error);
-});
+//   return getAnalysis({ url });
+// }).then((response) => {
+//   console.log(response);
+// }).catch(error => {
+//   renderError(error);
+// });
 
 
 function renderTitles(articles) {
@@ -62,15 +62,20 @@ const renderError = (error) => {
   $('#error-modal .modal-content').append(header, paragraph);
 
   modal.modal('open');
-} 
+}
 
-var searchBox = document.getElementById("searchbox");
-var searchButton = document.getElementById ("searchbutton");
+$("#searchbutton").click(function(event) {
 
-$(searchButton).click(function(){
-  let input = document.getElementById("searchbox").value;
-  //CONSOLE LOG
-  console.log ('Input value: ', input);
+  event.preventDefault();
+  let input = $("#searchbox").val();
+
+  getEverything({q: input})
+    .then(({ articles }) => {
+      renderTitles(articles);
+    })
+    .catch(error => {
+      renderError(error);
+    })
 });
 
 $(document).ready(function(){
