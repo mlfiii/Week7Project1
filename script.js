@@ -64,6 +64,15 @@ const renderError = (error) => {
   modal.modal('open');
 } 
 
+var searchBox = document.getElementById("searchbox");
+var searchButton = document.getElementById ("searchbutton");
+
+$(searchButton).click(function(){
+  let input = document.getElementById("searchbox").value;
+  //CONSOLE LOG
+  console.log ('Input value: ', input);
+});
+
 $(document).ready(function(){
   $('.modal').modal();
 });
