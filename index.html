@@ -15,6 +15,14 @@
 </head>
 
 <body>
+  <!-- Error Modal -->
+  <div id="error-modal" class="modal red darken-3 bottom-sheet white-text text-darken-3">
+    <div class="modal-content">
+    </div>
+    <div class="modal-footer red lighten-1">
+      <a href="#!" class="modal-close waves-effect red darken-3 waves-blue btn">Close</a>
+    </div>
+  </div>
   <!-- <div class="row">
         <div class="col s1">1</div>
         <div class="col s1">2</div>
@@ -41,12 +49,12 @@
     <!--input bar-->
     <div class="container">
       <div class="row">
-        <form class="col s12">
+        <form id="search" class="col s12">
           <div class="row">
             <div class="input-field col s6 offset-m3">
               <i class="material-icons prefix">edit</i>
-              <textarea id="icon_prefix2" id="searchbox" class="materialize-textarea"></textarea>
-              <label for="icon_prefix2">Search</label>
+              <input id="searchbox" type="text"></input>
+              <label for="searchbox">Search</label>
             </div>
           </div>
         </form>
@@ -57,8 +65,10 @@
     <!--search button-->
     <div class="container">
       <div class="row">
-        <a class="col S2 waves-effect waves-light btn offset-m5" id="searchbutton"><i
-            class="material-icons left">search</i>Search</a>
+        <button type="submit" form="search" class="col S2 waves-effect waves-light btn offset-m5" id="searchbutton">
+          <i class="material-icons left"></i>
+          Search
+        </button>
       </div>
     </div>
 
@@ -78,9 +88,9 @@
 
 
     <!-- Compiled and minified JavaScript for Materialize -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <!-- Our backend scripts -->
     <script src="./api.js"></script>

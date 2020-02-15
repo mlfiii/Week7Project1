@@ -1,27 +1,27 @@
+// // test area --- not part of final product
+// getEverything({q: 'pole vault', source: 'CNN'}).then((response) => {
+//   const { articles } = response;
 
-getEverything({ q: 'pole vault', source: 'CNN' }).then((response) => {
-  const { articles } = response;
+//   // var articles = response.articles;
+//   const { url } = articles[0];
 
-  // var articles = response.articles;
-  const { url } = articles[0];
+//   // var url = articles[0].url;
+//   // console.log({ url, googleResponse: response })
+//   renderTitles(articles)
 
-
-  // var url = articles[0].url;
-  // console.log({ url, googleResponse: response })
-
-  renderTitles(articles)
-
-  return getAnalysis({ url });
-}).then((response) => {
-
-
-})
+//   return getAnalysis({ url });
+// }).then((response) => {
+//   console.log(response);
+// }).catch(error => {
+//   renderError(error);
+// });
 
 
 function renderTitles(articles) {
 
   //The purpose of this function is to get the title passed into the parameter and append it to the end of the headline-results list.
   var articleList = $("#headline-results");
+  articleList.empty();
 
 
   for (let i = 0; i < articles.length; i++) {
@@ -48,3 +48,48 @@ function renderTitles(articles) {
 
 
 }
+
+const renderError = (error) => {
+  console.error(error);
+  console.log({ error, error })
+  const modal = $('#error-modal');
+
+  const header = $('<h4>');
+  const paragraph = $('<p>');
+
+  header.text(`Error: ${error.code || ''}`);
+  paragraph.text(error.message || '');
+
+  $('#error-modal .modal-content').append(header, paragraph);
+
+  modal.modal('open');
+}
+
+$("#searchbutton").click(function (event) {
+
+  event.preventDefault();
+  let input = $("#searchbox")
+    .val()
+    .trim();
+
+  if (input) {
+    getEverything({ q: input })
+      .then(({ articles }) => {
+        renderTitles(articles);
+      })
+      .catch(error => {
+        renderError(error);
+      })
+  }
+});
+
+$(document).ready(function () {
+  $('.modal').modal();
+  getHeadlines({ country: 'us' })
+    .then(({ articles }) => {
+      renderTitles(articles);
+    })
+    .catch(error => {
+      renderError(error);
+    })
+});
