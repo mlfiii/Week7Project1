@@ -1,21 +1,20 @@
-
-getEverything({ q: 'pole vault', source: 'CNN' }).then((response) => {
+// test area --- not part of final product
+getEverything({q: 'pole vault', source: 'CNN'}).then((response) => {
   const { articles } = response;
 
   // var articles = response.articles;
   const { url } = articles[0];
 
-
   // var url = articles[0].url;
   // console.log({ url, googleResponse: response })
-
   renderTitles(articles)
 
   return getAnalysis({ url });
 }).then((response) => {
-
-
-})
+  console.log(response);
+}).catch(error => {
+  renderError(error);
+});
 
 
 function renderTitles(articles) {
@@ -48,3 +47,23 @@ function renderTitles(articles) {
 
 
 }
+
+const renderError = (error) => {
+  console.error(error);
+  console.log({error, error})
+  const modal = $('#error-modal');
+
+  const header = $('<h4>');
+  const paragraph = $('<p>');
+
+  header.text(`Error: ${error.code || ''}`);
+  paragraph.text(error.message || '');
+
+  $('#error-modal .modal-content').append(header, paragraph);
+
+  modal.modal('open');
+} 
+
+$(document).ready(function(){
+  $('.modal').modal();
+});
