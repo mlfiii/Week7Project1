@@ -17,8 +17,6 @@ getEverything({ q: 'pole vault', source: 'CNN' }).then((response) => {
 
 })
 
-// https://api.aylien.com/api/v1/combined?url=https://mashable.com/article/doomsday-vault-cherokee-nation/&endpoint=sentiment&endpoint=summarize
-
 
 function renderTitles(articles) {
 
@@ -36,11 +34,6 @@ function renderTitles(articles) {
       + "<div class='card-image'><img src=" + articleImage + "></div> " +
 
       " <span class='card-title'>" + articleTitle + " </span></div></div>"
-
-    var cardtxt2 = "<div class='card horizontal orange darken-4 z-depth-5'> <div class='card-content white-text'>"
-      + "<div class='card-image'><img src=" + articleImage + "> <span class='card-title'>" + articleTitle + " </span></div> " +
-
-      " </div></div>"
 
     //declare the div tag
     var div = $("<div>");
