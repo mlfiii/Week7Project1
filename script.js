@@ -21,6 +21,7 @@ function renderTitles(articles) {
 
   //The purpose of this function is to get the title passed into the parameter and append it to the end of the headline-results list.
   var articleList = $("#headline-results");
+  articleList.empty();
 
 
   for (let i = 0; i < articles.length; i++) {
@@ -67,17 +68,28 @@ const renderError = (error) => {
 $("#searchbutton").click(function(event) {
 
   event.preventDefault();
-  let input = $("#searchbox").val();
+  let input = $("#searchbox")
+    .val()
+    .trim();
 
-  getEverything({q: input})
+  if (input) {
+    getEverything({q: input})
     .then(({ articles }) => {
       renderTitles(articles);
     })
     .catch(error => {
       renderError(error);
     })
+  }
 });
 
 $(document).ready(function(){
   $('.modal').modal();
+  getHeadlines({country: 'us'})
+    .then(({ articles }) => {
+      renderTitles(articles);
+    })
+    .catch(error => {
+      renderError(error);
+    })
 });
