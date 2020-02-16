@@ -139,16 +139,23 @@ $('#headline-results').on('click', '.article-btn', function () {
     var sentimentIcon = ""
     var sentimentColor = ""
 
+    //Sets the poliarity icon and color classes.
     if (sentimentPolarity === "negative") {
 
       sentimentIcon = "remove"
-      sentimentColor = "red"
+      sentimentColor = "red darken-4"
     }
     else if (sentimentPolarity === "positive") {
 
       sentimentIcon = "add"
-      sentimentColor = "green"
+      sentimentColor = "green darken-4"
     }
+    else if (sentimentPolarity === "neutral") {
+
+      sentimentIcon = "pause"
+      sentimentColor = "yellow darken-1"
+    }
+
 
 
     //Concatenates the synopsis text.
@@ -160,7 +167,7 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     //Used to set the html to the polarity and the summary.
     placeMeHere.html("<br>" + "<a class='waves-effect waves-light btn sentiment-btn " +
-      sentimentColor + " darken-4'>Sentiment<i class='material-icons left'>"
+      sentimentColor + "'>Sentiment<i class='material-icons left'>"
       + sentimentIcon + "</i></a> <br>" + responseTxt);
   });
 
