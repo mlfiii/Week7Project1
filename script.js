@@ -24,7 +24,7 @@ function renderTitles(articles) {
   var articleList = $("#headline-results");
   articleList.empty();
 
-  console.log(articles);
+  // console.log(articles);
   for (let i = 0; i < articles.length; i++) {
 
     var articleTitle = articles[i].title;
@@ -132,11 +132,36 @@ $('#headline-results').on('click', '.article-btn', function () {
   getAnalysis({ url: articleUrl }).then(function (response) {
 
     //Set the text variable.
+
     var responseTxt = response.text;
+    var sentimentPolarity = response.results[0].result.polarity
+    var sentenceArray = response.results[1].result.sentences
+    var sentimentIcon = ""
+    var sentimentColor = ""
 
-    //Places the text in the spexcific ID.
-    placeMeHere.html("<br>" + responseTxt);
+    if (sentimentPolarity === "negative") {
 
+      sentimentIcon = "remove"
+      sentimentColor = "red"
+    }
+    else if (sentimentPolarity === "positive") {
+
+      sentimentIcon = "add"
+      sentimentColor = "green"
+    }
+
+
+    //Concatenates the synopsis text.
+
+    for (let i = 0; i < sentenceArray.length; i++) {
+
+      responseTxt = responseTxt + " " + sentenceArray[i];
+    }
+
+    //Used to set the html to the polarity and the summary.
+    placeMeHere.html("<br>" + "<a class='waves-effect waves-light btn sentiment-btn " +
+      sentimentColor + " darken-4'>Sentiment<i class='material-icons left'>"
+      + sentimentIcon + "</i></a> <br>" + responseTxt);
   });
 
 });
@@ -163,6 +188,8 @@ $('#headline-results').on('click', '.copy-btn', function () {
   textarea.remove();
 
   //Alert user that the synopsis has been copied to clipboard.
-  alert("Your new password has been copied to clipboard!");
+  alert("Your new synopsis has been copied to clipboard!");
 
 });
+
+
