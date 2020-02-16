@@ -43,7 +43,9 @@ function renderTitles(articles) {
       "<div class='card-content'>" +
       "<span class='card-title blue-text text-darken-4'>" + articleTitle + "</span>" +
       "<a class='waves-effect waves-light btn article-btn blue darken-4' article-url='" + articleURL +
-      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>textsms</i></a>" +
+      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>textsms</i></a>  " +
+      "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
+      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i></a>" +
       "<p id='article-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
       "</div>" +
       "<div class='card-action'>" +
@@ -117,13 +119,13 @@ $(document).ready(function () {
 $('#headline-results').on('click', '.article-btn', function () {
 
   //The url that was set when the titles are rendered onto page.
-  var articleUrl = $(this).attr('article-url')
+  var articleUrl = $(this).attr('article-url');
 
   //Pulls the ID of the p tag where the text shall be rendered to.
-  var iamIn = $(this).attr('iam-in')
+  var iamIn = $(this).attr('iam-in');
 
   //Creates the ID of where the text shall be placed.
-  var placeMeHere = $("#" + iamIn)
+  var placeMeHere = $("#" + iamIn);
 
 
   //Initiates the analysis function.  Waits until a respoonse is returned.
@@ -136,5 +138,31 @@ $('#headline-results').on('click', '.article-btn', function () {
     placeMeHere.html("<br>" + responseTxt);
 
   });
+
+});
+
+// This is the onclick event to send text to the clipboard
+$('#headline-results').on('click', '.copy-btn', function () {
+
+  //Setup the objects that are used to copy the text
+  const copiedFromTextArea = $(this).attr('iam-in');
+  const textarea = document.createElement("textarea");
+  const textToCopy = $("#" + copiedFromTextArea).text();
+
+  //If the synopsis text is blank, exit the function because the synopsis has not been retrieved yet.  Alert the user.
+  if (!textToCopy) {
+    alert("You must click on the synopsis button first!");
+    return;
+  }
+
+  //Create a text area that holds the synopsis text to be copied to clipboard
+  textarea.value = textToCopy;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+
+  //Alert user that the synopsis has been copied to clipboard.
+  alert("Your new password has been copied to clipboard!");
 
 });
