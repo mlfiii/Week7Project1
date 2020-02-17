@@ -210,7 +210,7 @@ $('#headline-results').on('click', '.copy-btn', function () {
 
   //If the synopsis text is blank, exit the function because the synopsis has not been retrieved yet.  Alert the user.
   if (!textToCopy) {
-    // alert("You must click on the synopsis button first!");
+    // alert("You must click on the synopsis button first!");gi
     return;
   }
 

@@ -11,7 +11,7 @@
   <!--sylesheet-->
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel='icon' href='images/news_s.ico' type='image/x-icon' />
-  <title>The Stand</title>
+  <title>The News Stand</title>
 </head>
 
 <body>
@@ -23,84 +23,61 @@
       <a href="#!" class="modal-close waves-effect red darken-3 waves-blue btn">Close</a>
     </div>
   </div>
-  <!-- <div class="row">
-        <div class="col s1">1</div>
-        <div class="col s1">2</div>
-        <div class="col s1">3</div>
-        <div class="col s1">4</div>
-        <div class="col s1">5</div>
-        <div class="col s1">6</div>
-        <div class="col s1">7</div>
-        <div class="col s1">8</div>
-        <div class="col s1">9</div>
-        <div class="col s1">10</div>
-        <div class="col s1">11</div>
-        <div class="col s1">12</div>
-    </div> -->
 
-  <!--center image-->
-  <div class="container">
-    <div class="row">
-      <div class="col s12 center-text">
-        <!-- <img class="responsive-img" src="Images/NewsLayout.jpg" height="auto" width="100%"> -->
-        <h2>The News Stand</h2>
-        <form id="search" class="">
-          <div class="row">
-            <div class="input-field col s6">
-              <i class="material-icons prefix">edit</i>
-              <input id="searchbox" type="text"></input>
-              <label for="searchbox">Enter search:
-              </label>
+  <!-- Fixed Header -->
+  <div class="navbar-fixed blue darken-4">
+    <nav class=" blue darken-4 no-shadows">
+      <div class="nav-wrapper blue darken-4">
+        <hr>
+        <div class="container">
+          <form id="search" class="">
+            <div class="row">
+              <div id="site-name" class="col s3">
+                <span>The News Stand</span>
+              </div>
+              <div class="input-field col s5">
+
+                <i class="material-icons prefix">edit</i>
+                <input id="searchbox" type="text"></input>
+                <label for="searchbox">Search:
+                </label>
+              </div>
+              <div class="col"></div>
+              <button type="submit" form="search" class="col S1 waves-effect waves-light btn" id="searchbutton">
+                <i class="material-icons">search</i>
+
+              </button>
             </div>
-          </div>
-        </form>
-
-      </div>
-    </div>
-
-    <!--input bar-->
-    <div class="container">
-      <div class="row">
-
-      </div>
-    </div>
-
-
-    <!--search button-->
-    <div class="container">
-      <div class="row">
-        <button type="submit" form="search" class="col S2 waves-effect waves-light btn " id="searchbutton">
-          <i class="material-icons left">search</i>
-          Search
-        </button>
-      </div>
-    </div>
-
-    <!--displayed results-->
-    <div class="container">
-      <div class="row">
-        <div class="col s12 ">
-          <div class="index ">
-            <hr>
-            <h3>Top Articles</h3>
-            <hr>
-          </div>
-
-          <div id="headline-results"></div>
-
+          </form>
         </div>
       </div>
+    </nav>
+  </div>
+
+  <!--displayed results-->
+  <div class="container">
+    <div class="row">
+      <div class="col s12 ">
+        <div class="index ">
+          <h5>Top Articles</h5>
+          <hr>
+        </div>
+
+        <div id="headline-results"></div>
+
+      </div>
     </div>
+  </div>
 
 
-    <!-- Compiled and minified JavaScript for Materialize -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Compiled and minified JavaScript for Materialize -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <!-- Our backend scripts -->
-    <script src="./api.js"></script>
-    <script src="./script.js"></script>
+  <!-- Our backend scripts -->
+  <script src="./api.js"></script>
+  <script src="./script.js"></script>
 </body>
 
 </html>

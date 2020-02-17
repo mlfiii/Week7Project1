@@ -6,51 +6,82 @@
     font-family: 'Times New Roman', Times, serif;
 }   
 
-h1,h2, h3{
+/* Used to override preset css */
+nav
+,.navbar-fixed
+{
+    height: 80px;
+    line-height: 36px;
+}
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 30px;
+    line-height: 30px;
+}
+
+#site-name{
+    font-size: 22.5px; 
+    line-height: 20px;
+    font-weight: bolder;
+}
+
+@media only screen and (min-width: 601px){
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 70px;
+        line-height: 36px;
+    }
+}
+
+.no-shadows {
+    box-shadow: none!important;
+}
+h1,h2, h3,span{
 
     font-family: 'Georgia', Times, 'Times New Roman', serif;
     margin: 10px 0px 0px 0px;
 }
 
-h3{
+h5{
 
     font-family: 'Georgia', Times, 'Times New Roman', serif;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 10px;
 }
 
 hr{
 
-    margin: 0px 0px 0px 0px;
-    color: black 2px;
-    z-index: -100;
+    margin: 0px 0px 10px 0px;
+    color: whitesmoke 2px;
+
 }
 
 .input-field i, .input-field label {
-    color:black;
+    color:whitesmoke;
 }
 
 /* When the input box gets the focus, the color is set. */
 .input-field input[type=text]:focus + label  {
-    color: #01579b!important;
+    color: white!important;
 }
 
 /* label underline focus color */
 .input-field input[type=text]:focus {
-    border-bottom: 1px solid #01579b!important;
-    box-shadow: 0 1px 0 0 #01579b!important;
+    
+    border-bottom: 1px solid white!important;
+    box-shadow: 0 1px 0 0 white!important;
   }
 
   /* icon prefix focus color */
 .input-field .prefix.active {
-    color: #01579b!important;
+    color: white!important;
    }
    
 .input-field textarea  {
-    border-bottom: 1px solid #01579b;
+    border-bottom: 1px solid whitesmoke;
     margin-bottom: 0px;
+    background-color: white;
 }
 body {
-    /* background-image: url("Images/Background1.png"); */
+
     background-color: whitesmoke;
     background-attachment: fixed;
    }
@@ -62,16 +93,18 @@ body {
    }
 
    #searchbox {
-      color: #01579b; 
+      color: white; 
       width: 100%;
+      background-color: #1e88e5;
       
    }
 
    #searchbutton {
-       background-color: #01579b;
-       border: rgb(217, 177, 238) thin solid;
+       background-color: #0d47a1;
+       border: whitesmoke thin solid;
        border-radius: 5%;
-       margin: 0px 0px 10px 10px;
+       margin: 5px 0px 0px 16px;
+       line-height: 36px;
     }
 
     #headline-results{
@@ -88,4 +121,3 @@ body {
 
  margin:10px 0px 10px 0px;
 }
-
