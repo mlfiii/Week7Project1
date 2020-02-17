@@ -6,6 +6,12 @@
     font-family: 'Times New Roman', Times, serif;
 }   
 
+h1{
+
+    font-family: 'Georgia', Times, 'Times New Roman', serif;
+}
+
+
 .input-field i, .input-field label {
     color:black;
 }
@@ -51,6 +57,7 @@ body {
        background-color: #01579b;
        border: rgb(217, 177, 238) thin solid;
        border-radius: 5%;
+       margin-bottom: 10px;
     }
 
     #headline-results{
@@ -62,3 +69,9 @@ body {
 
     margin: 0px;
 }
+
+.sentiment-btn, .article-btn, .copy-btn{
+
+ margin:10px 0px 10px 0px;
+}
+

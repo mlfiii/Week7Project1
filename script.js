@@ -51,7 +51,7 @@ function renderTitles(articles) {
 
     }
 
-    //Create the HTML that create the card.
+    //Create the HTML that creates the card.
 
     var cardtxt = "<div class='row'>" +
       "<div class='col s12 m7 offset-m3'>" +
@@ -144,17 +144,11 @@ $('#headline-results').on('click', '.article-btn', function () {
   var placeSynopsisHere = $("#" + iamIn);
   var placeSentimentHere = $("#" + iamSentID);
 
-
   //The url that was set when the titles are rendered onto page.
   var articleUrl = $(this).attr('article-url');
 
-
   //Creates the ID of where the text shall be placed.
   var placeSynopsisHere = $("#" + iamIn);
-
-  console.log(iamSentID)
-
-
 
   //Initiates the analysis function.  Waits until a respoonse is returned.
   getAnalysis({ url: articleUrl }).then(function (response) {
@@ -189,10 +183,7 @@ $('#headline-results').on('click', '.article-btn', function () {
       sentimentColor = "yellow darken-1"
     }
 
-
-
     //Concatenates the synopsis text.
-
     for (let i = 0; i < sentenceArray.length; i++) {
 
       responseTxt = responseTxt + " " + sentenceArray[i];
@@ -200,14 +191,11 @@ $('#headline-results').on('click', '.article-btn', function () {
     }
 
     //Used to set the html to the polarity and the summary.
-    placeSynopsisHere.html("<br>" + responseTxt);
-    placeSentimentHere.html("<br>" + "<a class='waves-effect waves-light btn sentiment-btn " +
+    placeSynopsisHere.html("<hr><br>" + responseTxt);
+    placeSentimentHere.html("<hr>" + "<a class='waves-effect waves-light btn sentiment-btn " +
       sentimentColor + "'>Sentiment<i class='material-icons left'>"
       + sentimentIcon + "</i></a> <br>")
 
-    // + "<a class='waves-effect waves-light btn sentiment-btn " +
-    // sentimentColor + "'>Sentiment<i class='material-icons left'>"
-    // + sentimentIcon + "</i></a> <br>" + 
   });
 
 });
