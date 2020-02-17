@@ -18,6 +18,9 @@
 
 // getEverything("https://www.bbc.co.uk/sport/athletics/51511341");
 
+
+const currentArticle = "";
+
 function renderTitles(articles) {
 
   //The purpose of this function is to get the title passed into the parameter and append it to the end of the headline-results list.
@@ -32,20 +35,37 @@ function renderTitles(articles) {
     var articleURL = articles[i].url;
     var articleID = i
 
+    //These sets the vlaulues to blank in case there's something that isn't returned.
+    if (articleImage === null) {
+      articleImage = ""
+
+    }
+
+    if (articleTitle === null) {
+      articleTitle = ""
+
+    }
+
+    if (articleURL === null) {
+      articleURL = ""
+
+    }
+
     //Create the HTML that create the card.
 
     var cardtxt = "<div class='row'>" +
-      "<div class='col s12 m7'>" +
-      "<div class='card'>" +
+      "<div class='col s12 m7 offset-m3'>" +
+      "<div class='card hoverable'>" +
       "<div class='card-image'>" +
       "<img src=" + articleImage + ">" +
       "</div>" +
       "<div class='card-content'>" +
       "<span class='card-title blue-text text-darken-4'>" + articleTitle + "</span>" +
       "<a class='waves-effect waves-light btn article-btn blue darken-4' article-url='" + articleURL +
-      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>textsms</i></a>  " +
+      "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "'><i class='material-icons left'>textsms</i></a>  " +
       "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
       "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i></a>" +
+      "<p id='sentiment-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
       "<p id='article-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
       "</div>" +
       "<div class='card-action'>" +
@@ -118,14 +138,22 @@ $(document).ready(function () {
 //mlf: This click locates the specific button clicked on and renders the synopsis.
 $('#headline-results').on('click', '.article-btn', function () {
 
+  //Pulls the ID of the p tag where the text shall be rendered to.
+  var iamIn = $(this).attr('iam-in');
+  var iamSentID = $(this).attr('sent-id');
+  var placeSynopsisHere = $("#" + iamIn);
+  var placeSentimentHere = $("#" + iamSentID);
+
+
   //The url that was set when the titles are rendered onto page.
   var articleUrl = $(this).attr('article-url');
 
-  //Pulls the ID of the p tag where the text shall be rendered to.
-  var iamIn = $(this).attr('iam-in');
 
   //Creates the ID of where the text shall be placed.
-  var placeMeHere = $("#" + iamIn);
+  var placeSynopsisHere = $("#" + iamIn);
+
+  console.log(iamSentID)
+
 
 
   //Initiates the analysis function.  Waits until a respoonse is returned.
@@ -155,6 +183,11 @@ $('#headline-results').on('click', '.article-btn', function () {
       sentimentIcon = "pause"
       sentimentColor = "yellow darken-1"
     }
+    else {
+
+      sentimentIcon = ""
+      sentimentColor = "yellow darken-1"
+    }
 
 
 
@@ -163,17 +196,23 @@ $('#headline-results').on('click', '.article-btn', function () {
     for (let i = 0; i < sentenceArray.length; i++) {
 
       responseTxt = responseTxt + " " + sentenceArray[i];
+
     }
 
     //Used to set the html to the polarity and the summary.
-    placeMeHere.html("<br>" + "<a class='waves-effect waves-light btn sentiment-btn " +
+    placeSynopsisHere.html("<br>" + responseTxt);
+    placeSentimentHere.html("<br>" + "<a class='waves-effect waves-light btn sentiment-btn " +
       sentimentColor + "'>Sentiment<i class='material-icons left'>"
-      + sentimentIcon + "</i></a> <br>" + responseTxt);
+      + sentimentIcon + "</i></a> <br>")
+
+    // + "<a class='waves-effect waves-light btn sentiment-btn " +
+    // sentimentColor + "'>Sentiment<i class='material-icons left'>"
+    // + sentimentIcon + "</i></a> <br>" + 
   });
 
 });
 
-// This is the onclick event to send text to the clipboard
+//mlf:  This is the onclick event to send text to the clipboard
 $('#headline-results').on('click', '.copy-btn', function () {
 
   //Setup the objects that are used to copy the text

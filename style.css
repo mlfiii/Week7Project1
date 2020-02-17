@@ -7,32 +7,48 @@
 }   
 
 .input-field i, .input-field label {
-    color: white!important;
+    color:black;
 }
 
+/* When the input box gets the focus, the color is set. */
+.input-field input[type=text]:focus + label  {
+    color: #01579b!important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #01579b!important;
+    box-shadow: 0 1px 0 0 #01579b!important;
+  }
+
+  /* icon prefix focus color */
+.input-field .prefix.active {
+    color: #01579b!important;
+   }
+   
 .input-field textarea  {
-    border-bottom: 1px solid white!important;
+    border-bottom: 1px solid #01579b;
 }
 body {
-    background-image: url("Images/Background1.png");
-    background-color: #cccccc;
+    /* background-image: url("Images/Background1.png"); */
+    background-color: whitesmoke;
     background-attachment: fixed;
    }
 
    .responsive-img {
        margin-top: 150px;
-       border: rgb(55, 32, 109) thin solid;
+       border: rgb(135, 122, 165) thin solid;
        box-shadow: 10px 10px;
    }
 
    #searchbox {
-      color: white; 
+      color: #01579b; 
       width: 100%;
       
    }
 
    #searchbutton {
-       background-color:rgb(67, 129, 211);
+       background-color: #01579b;
        border: rgb(217, 177, 238) thin solid;
        border-radius: 5%;
     }
@@ -41,3 +57,8 @@ body {
 
         color: white;
     }
+
+.row{
+
+    margin: 0px;
+}
