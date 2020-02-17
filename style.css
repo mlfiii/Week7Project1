@@ -21,6 +21,8 @@ h3{
 hr{
 
     margin: 0px 0px 0px 0px;
+    color: black 2px;
+    z-index: -100;
 }
 
 .input-field i, .input-field label {
