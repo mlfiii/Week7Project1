@@ -12,6 +12,16 @@ h1,h2, h3{
     margin: 10px 0px 0px 0px;
 }
 
+h3{
+
+    font-family: 'Georgia', Times, 'Times New Roman', serif;
+    margin: 10px 0px 10px 0px;
+}
+
+hr{
+
+    margin: 0px 0px 0px 0px;
+}
 
 .input-field i, .input-field label {
     color:black;
