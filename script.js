@@ -210,6 +210,7 @@ $('#headline-results').on('click', '.copy-btn', function () {
   const textarea = document.createElement("textarea");
   const textToCopy = $("#" + copiedFromTextArea).text();
 
+
   //If the synopsis text is blank, exit the function because the synopsis has not been retrieved yet.  Alert the user.
   if (!textToCopy) {
     // alert("You must click on the synopsis button first!");
@@ -235,6 +236,7 @@ const renderMessage = (message_code) => {
 
   //Declare and set the variables and constants
   const modal = $('#message-modal');
+
   var message_text = ""
 
   //Clear the modal
@@ -261,5 +263,10 @@ const renderMessage = (message_code) => {
 
   //Open the modal.
   modal.modal('open');
+
+  //Close modal after 4 seconds if user doesn't click close button.
+  setTimeout(function () {
+    $(modal).modal('close')
+  }, 4000);
 };
 
