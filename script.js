@@ -27,7 +27,9 @@ function renderTitles(articles) {
   var articleList = $("#headline-results");
   articleList.empty();
 
-  // console.log(articles);
+  console.log(articles);
+
+
   for (let i = 0; i < articles.length; i++) {
 
     var articleTitle = articles[i].title;
@@ -36,17 +38,17 @@ function renderTitles(articles) {
     var articleID = i
 
     //These sets the vlaulues to blank in case there's something that isn't returned.
-    if (articleImage === null) {
+    if (articleImage === null || articleImage === "null") {
       articleImage = ""
 
     }
 
-    if (articleTitle === null) {
+    if (articleTitle === null || articleTitle === "null") {
       articleTitle = ""
 
     }
 
-    if (articleURL === null) {
+    if (articleURL === null || articleURL === "null") {
       articleURL = ""
 
     }
@@ -66,7 +68,7 @@ function renderTitles(articles) {
       "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
       "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i></a>" +
       "<p id='sentiment-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
-      "<p id='article-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
+      "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text'></p>" +
       "</div>" +
       "<div class='card-action'>" +
       "<a href='" + articleURL + "' target='_blank'>Full Article</a>" +
@@ -210,7 +212,8 @@ $('#headline-results').on('click', '.copy-btn', function () {
 
   //If the synopsis text is blank, exit the function because the synopsis has not been retrieved yet.  Alert the user.
   if (!textToCopy) {
-    // alert("You must click on the synopsis button first!");gi
+    // alert("You must click on the synopsis button first!");
+    renderMessage("SM2");
     return;
   }
 
@@ -222,8 +225,41 @@ $('#headline-results').on('click', '.copy-btn', function () {
   textarea.remove();
 
   //Alert user that the synopsis has been copied to clipboard.
-  // alert("Your new synopsis has been copied to clipboard!");
+  renderMessage("SM1");
 
 });
 
+
+//Function used to build messages for the user to acknowledge by clicking close.
+const renderMessage = (message_code) => {
+
+  //Declare and set the variables and constants
+  const modal = $('#message-modal');
+  var message_text = ""
+
+  //Clear the modal
+  $('#message-modal .modal-content').empty();
+
+  //Decide which message was raised.
+  if (message_code === "SM1") {
+    message_text = "The article synopsis has been copied to the clipboard!"
+  }
+  else if (message_code = "SM2") {
+    message_text = "Please click the synopsis button before pressing copy!"
+  }
+
+  //Header and paragraph tags that will be appended.
+  const header = $('<h4>');
+  const paragraph = $('<p>');
+
+  //Set the message code and message.
+  header.text(message_code);
+  paragraph.text(message_text || '');
+
+  //Append message to modal
+  $('#message-modal .modal-content').append(header, paragraph);
+
+  //Open the modal.
+  modal.modal('open');
+};
 

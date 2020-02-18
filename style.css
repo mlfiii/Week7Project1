@@ -65,7 +65,7 @@ hr{
 
 /* label underline focus color */
 .input-field input[type=text]:focus {
-    
+
     border-bottom: 1px solid white!important;
     box-shadow: 0 1px 0 0 white!important;
   }
@@ -120,4 +120,9 @@ body {
 .sentiment-btn, .article-btn, .copy-btn{
 
  margin:10px 0px 10px 0px;
+}
+
+.article-text{
+
+    margin: 0px;
 }
