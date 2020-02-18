@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
     list-style: none;
@@ -8,10 +8,8 @@
 
 /* Used to override preset css */
 nav
-,.navbar-fixed
 {
-    height: 80px;
-    line-height: 36px;
+  height: auto;
 }
 
 nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
@@ -19,28 +17,34 @@ nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
     line-height: 30px;
 }
 
+nav .input-field {
+  height: auto;
+}
+/* 
 #site-name{
     font-size: 22.5px; 
     line-height: 20px;
     font-weight: bolder;
-}
+} */
 
-@media only screen and (min-width: 601px){
-    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
-        height: 80px;
-        line-height: 36px;
-    }
+@media (min-width: 601px){
+  nav, nav .input-field {
+      height: auto;
+  }
 }
 
 .no-shadows {
     box-shadow: none!important;
 }
 
-
-h1,h2, h3,span{
+h1, h2, h3, span {
 
     font-family: 'Georgia', Times, 'Times New Roman', serif;
     margin: 10px 0px 0px 0px;
+}
+
+h4 {
+  margin: 1.42rem 0 .912rem 0;
 }
 
 h5{
@@ -66,68 +70,65 @@ hr{
 }
 
 /* label underline focus color */
-.input-field input[type=text]:focus {
+.input-field input[type=text] {
 
     border-bottom: 1px solid white!important;
-    box-shadow: 0 1px 0 0 white!important;
+    box-shadow: 0 1px 0 0 black!important;
   }
 
   /* icon prefix focus color */
 .input-field .prefix.active {
     color: white!important;
-   }
-   
-.input-field textarea  {
-    border-bottom: 1px solid whitesmoke;
-    margin-bottom: 0px;
-    background-color: white;
-}
+  }
+
 body {
 
-    background-color: whitesmoke;
-    background-attachment: fixed;
-   }
+  background-color: whitesmoke;
+  background-attachment: fixed;
+}
 
-   .responsive-img {
-       margin-top: 150px;
-       border: rgb(135, 122, 165) thin solid;
-       box-shadow: 10px 10px;
-   }
+.responsive-img {
+  margin-top: 150px;
+  border: rgb(135, 122, 165) thin solid;
+  box-shadow: 10px 10px;
+}
 
-   #searchbox {
-      color: white; 
-      width: 100%;
-      background-color: #1e88e5;
-      margin-top: 7px;
-      
-   }
+#searchbox {
+  color: white; 
+  /* width: 100%; */
+  /* background-color: #1e88e5; */
+  /* margin-top: 7px; */
+  
+}
 
-   #searchbutton {
-       background-color: #0d47a1;
-       border: whitesmoke thin solid;
-       border-radius: 5%;
-       margin: 10px 0px 0px 16px;
-       line-height: 36px;
-    }
+#searchbutton {
+  background-color: #1e88e5;
+  border: whitesmoke thin solid;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* border-radius: 5%;
+  margin: 10px 0px 0px 16px; */
+  /* line-height: 36px; */
+}
 
-    #headline-results{
-
-        color: white;
-    }
-
+#headline-results{
+  color: white;
+}
+/* 
 .row{
-
     margin: 0px;
-}
+} */
 
-.sentiment-btn, .article-btn, .copy-btn{
+/* .sentiment-btn, .article-btn, .copy-btn{
 
- margin:10px 0px 10px 0px;
-}
+  margin:10px 0px 10px 0px;
+} */
 
 .article-text{
 
     margin: 0px;
 }
 
-
+.article-image {
+  width: 100%;
+}
