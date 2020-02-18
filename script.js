@@ -16,6 +16,10 @@
 //   renderError(error);
 // });
 
+// getEverything("https://www.bbc.co.uk/sport/athletics/51511341");
+
+
+const currentArticle = "";
 
 function renderTitles(articles) {
 
@@ -23,17 +27,52 @@ function renderTitles(articles) {
   var articleList = $("#headline-results");
   articleList.empty();
 
-
   for (let i = 0; i < articles.length; i++) {
 
     var articleTitle = articles[i].title;
     var articleImage = articles[i].urlToImage;
+    var articleURL = articles[i].url;
+    var articleID = i
 
-    //Create the HTML that create the card.
-    var cardtxt = "<div class='card horizontal orange darken-4 z-depth-5'> <div class='card-content white-text'>"
-      + "<div class='card-image'><img src=" + articleImage + "></div> " +
+    //These sets the vlaulues to blank in case there's something that isn't returned.
+    if (articleImage === null || articleImage === "null") {
+      articleImage = ""
 
-      " <span class='card-title'>" + articleTitle + " </span></div></div>"
+    }
+
+    if (articleTitle === null || articleTitle === "null") {
+      articleTitle = ""
+
+    }
+
+    if (articleURL === null || articleURL === "null") {
+      articleURL = ""
+
+    }
+
+    //Create the HTML that creates the card.
+
+    var cardtxt = "<div class='row'>" +
+      "<div class='col s12 m7 offset-m3'>" +
+      "<div class='card hoverable'>" +
+      "<div class='card-image'>" +
+      "<img src=" + articleImage + ">" +
+      "</div>" +
+      "<div class='card-content'>" +
+      "<span class='card-title blue-text text-darken-4'>" + articleTitle + "</span>" +
+      "<a class='waves-effect waves-light btn article-btn blue darken-4' article-url='" + articleURL +
+      "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "'><i class='material-icons left'>textsms</i></a>  " +
+      "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
+      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i></a>" +
+      "<p id='sentiment-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
+      "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text'></p>" +
+      "</div>" +
+      "<div class='card-action'>" +
+      "<a href='" + articleURL + "' target='_blank'>Full Article</a>" +
+      "</div>" +
+      "</div>" +
+      "</div>" +
+      "</div>"
 
     //declare the div tag
     var div = $("<div>");
@@ -47,11 +86,11 @@ function renderTitles(articles) {
   }
 
 
-}
+};
 
 const renderError = (error) => {
   console.error(error);
-  console.log({error, error})
+  console.log({ error, error })
   const modal = $('#error-modal');
 
   const header = $('<h4>');
@@ -65,7 +104,7 @@ const renderError = (error) => {
   modal.modal('open');
 }
 
-$("#searchbutton").click(function(event) {
+$("#searchbutton").click(function (event) {
 
   event.preventDefault();
   let input = $("#searchbox")
@@ -73,19 +112,19 @@ $("#searchbutton").click(function(event) {
     .trim();
 
   if (input) {
-    getEverything({q: input})
-    .then(({ articles }) => {
-      renderTitles(articles);
-    })
-    .catch(error => {
-      renderError(error);
-    })
+    getEverything({ q: input })
+      .then(({ articles }) => {
+        renderTitles(articles);
+      })
+      .catch(error => {
+        renderError(error);
+      })
   }
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
   $('.modal').modal();
-  getHeadlines({country: 'us'})
+  getHeadlines({ country: 'us' })
     .then(({ articles }) => {
       renderTitles(articles);
     })
@@ -93,3 +132,138 @@ $(document).ready(function(){
       renderError(error);
     })
 });
+
+
+//mlf: This click locates the specific button clicked on and renders the synopsis.
+$('#headline-results').on('click', '.article-btn', function () {
+
+  //Pulls the ID of the p tag where the text shall be rendered to.
+  var iamIn = $(this).attr('iam-in');
+  var iamSentID = $(this).attr('sent-id');
+  var placeSynopsisHere = $("#" + iamIn);
+  var placeSentimentHere = $("#" + iamSentID);
+
+  //The url that was set when the titles are rendered onto page.
+  var articleUrl = $(this).attr('article-url');
+
+  //Creates the ID of where the text shall be placed.
+  var placeSynopsisHere = $("#" + iamIn);
+
+  //Initiates the analysis function.  Waits until a respoonse is returned.
+  getAnalysis({ url: articleUrl }).then(function (response) {
+
+    //Set the text variable.
+
+    var responseTxt = response.text;
+    var sentimentPolarity = response.results[0].result.polarity
+    var sentenceArray = response.results[1].result.sentences
+    var sentimentIcon = ""
+    var sentimentColor = ""
+
+    //Sets the poliarity icon and color classes.
+    if (sentimentPolarity === "negative") {
+
+      sentimentIcon = "remove"
+      sentimentColor = "red darken-4"
+    }
+    else if (sentimentPolarity === "positive") {
+
+      sentimentIcon = "add"
+      sentimentColor = "green darken-4"
+    }
+    else if (sentimentPolarity === "neutral") {
+
+      sentimentIcon = "pause"
+      sentimentColor = "yellow darken-1"
+    }
+    else {
+
+      sentimentIcon = ""
+      sentimentColor = "yellow darken-1"
+    }
+
+    //Concatenates the synopsis text.
+    for (let i = 0; i < sentenceArray.length; i++) {
+
+      responseTxt = responseTxt + " " + sentenceArray[i];
+
+    }
+
+    //Used to set the html to the polarity and the summary.
+    placeSynopsisHere.html("<hr><br>" + responseTxt);
+    placeSentimentHere.html("<hr>" + "<a class='waves-effect waves-light btn sentiment-btn " +
+      sentimentColor + "'>Sentiment<i class='material-icons left'>"
+      + sentimentIcon + "</i></a> <br>")
+
+  });
+
+});
+
+//mlf:  This is the onclick event to send text to the clipboard
+$('#headline-results').on('click', '.copy-btn', function () {
+
+  //Setup the objects that are used to copy the text
+  const copiedFromTextArea = $(this).attr('iam-in');
+  const textarea = document.createElement("textarea");
+  const textToCopy = $("#" + copiedFromTextArea).text();
+
+
+  //If the synopsis text is blank, exit the function because the synopsis has not been retrieved yet.  Alert the user.
+  if (!textToCopy) {
+    // alert("You must click on the synopsis button first!");
+    renderMessage("SM2");
+    return;
+  }
+
+  //Create a text area that holds the synopsis text to be copied to clipboard
+  textarea.value = textToCopy;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+
+  //Alert user that the synopsis has been copied to clipboard.
+  renderMessage("SM1");
+
+});
+
+
+//Function used to build messages for the user to acknowledge by clicking close.
+const renderMessage = (message_code) => {
+
+  //Declare and set the variables and constants
+  const modal = $('#message-modal');
+
+  var message_text = ""
+
+  //Clear the modal
+  $('#message-modal .modal-content').empty();
+
+  //Decide which message was raised.
+  if (message_code === "SM1") {
+    message_text = "The article synopsis has been copied to the clipboard!"
+  }
+  else if (message_code = "SM2") {
+    message_text = "Please click the synopsis button before pressing copy!"
+  }
+
+  //Header and paragraph tags that will be appended.
+  const header = $('<h4>');
+  const paragraph = $('<p>');
+
+  //Set the message code and message.
+  header.text(message_code);
+  paragraph.text(message_text || '');
+
+  //Append message to modal
+  $('#message-modal .modal-content').append(header, paragraph);
+
+  //Open the modal.
+  modal.modal('open');
+
+  //Close modal after 4 seconds if user doesn't click close button.
+  setTimeout(function () {
+    $(modal).modal('close')
+  }, 4000);
+};
+
