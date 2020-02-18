@@ -34,45 +34,34 @@
   </div>
 
   <!-- Fixed Header -->
-  <div class="navbar-fixed blue darken-4">
-    <nav class=" blue darken-4 no-shadows">
-      <div class="nav-wrapper blue darken-4">
-        <hr>
-        <div class="container">
-          <form id="search" class="">
-            <div class="row">
-              <div id="site-name" class="col s3">
-                <span>The News Stand</span>
-              </div>
-              <div class="input-field col s5">
-
-                <i class="material-icons prefix">edit</i>
-                <input id="searchbox" type="text" autocomplete="on"></input>
-                <label for="searchbox">Search:
-                </label>
-              </div>
-              <div class="col"></div>
-              <button type="submit" form="search" class="col S1 waves-effect waves-light btn" id="searchbutton">
-                <i class="material-icons">search</i>
-
-              </button>
-            </div>
-          </form>
-
+  <nav class="blue darken-4 no-shadows">
+    <div class="nav-wrapper container">
+      <form id="search" class="row">
+        <h4 id="site-name" class="col s12 m3">
+          The News Stand
+        </h4>
+        <div class="input-field col s9 offset-m3 m5">
+          <input id="searchbox" type="text" placeholder="Search" autocomplete="on"></input>
         </div>
-      </div>
-    </nav>
-  </div>
+        <div class="col s1">
+          <button type="submit" form="search" class="waves-effect waves-light btn-small" id="searchbutton">
+            <i class="material-icons">search</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </nav>
+
   <!--displayed results-->
   <div class="container">
     <div class="row">
-      <div class="col s12 ">
+      <div class="col s12">
         <div class="index ">
           <h5 id="header-text"></h5>
           <hr>
         </div>
 
-        <div id="headline-results"></div>
+        <div id="headline-results" class="center-align"></div>
 
       </div>
     </div>

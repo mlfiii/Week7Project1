@@ -89,30 +89,29 @@ function renderTitles(articles) {
 
     //Create the HTML that creates the card.
 
-    var cardtxt = "<div class='row'>" +
-      "<div class='col s12 m7 offset-m3'>" +
+    var cardtxt =
       "<div class='card hoverable'>" +
-      "<div class='card-image'>" +
-      "<img src=" + articleImage + ">" +
+      "<div class='card-content row'>" +
+      "<div class='col s12 m5'>" +
+      "<img class='article-image' src=" + articleImage + ">" +
       "</div>" +
-      "<div class='card-content'>" +
-      "<span class='card-title blue-text text-darken-4'>" + articleTitle + "</span>" +
+      "<div class='card-title blue-text text-darken-4 col s12 m7'>" + articleTitle + "</div>" +
+      "<div class='col s12'>" +
       "<a class='waves-effect waves-light btn article-btn blue darken-4' article-url='" + articleURL +
-      "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "'><i class='material-icons left'>textsms</i></a>   " +
+      "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "'><i class='material-icons left'>textsms</i>Summary</a>  " +
       "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
-      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i></a>" +
-      "<p id='sentiment-id-" + articleID + "' class='blue-text text-darken-4'></p>" +
-      "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text'></p>" +
+      "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i>Copy to Clipboard</a>" +
+      "</div>" +
+      "<div id='sentiment-id-" + articleID + "' class='col s12'></div>" +
+      "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text col s12'></p>" +
       "</div>" +
       "<div class='card-action'>" +
       "<a href='" + articleURL + "' target='_blank'><span class='black-text'>" + "Source:</span> <span class='source blue-text text-darken-4'>'" + articleSource + "'</span></a>" +
       "</div>" +
-      "</div>" +
-      "</div>" +
       "</div>"
 
     //declare the div tag
-    var div = $("<div>");
+    var div = $("<div class='col s12 m6'>");
 
     //Set the div tag to the title of the article.
     div.html(cardtxt);
@@ -177,7 +176,6 @@ $('#headline-results').on('click', '.article-btn', function () {
   //Pulls the ID of the p tag where the text shall be rendered to.
   var iamIn = $(this).attr('iam-in');
   var iamSentID = $(this).attr('sent-id');
-  var placeSynopsisHere = $("#" + iamIn);
   var placeSentimentHere = $("#" + iamSentID);
 
   //Check the previous article id.  If it's not blank then go into if.
@@ -205,46 +203,46 @@ $('#headline-results').on('click', '.article-btn', function () {
   getAnalysis({ url: articleUrl }).then(function (response) {
 
     //Set the text variable.
+    var polarity = response.results[0].result.polarity;
+    var polarityConfidence = response.results[0].result.polarity_confidence;
+    var subjectivity = response.results[0].result.subjectivity;
+    var subjectivityConfidence = response.results[0].result.subjectivity_confidence;
+    var sentenceArray = response.results[1].result.sentences;
+    var sentimentIcon = "";
+    var sentimentColor = "";
+    
+    polarityConfidenceString = (polarityConfidence * 100).toFixed(2);
+    subjectivityConfidenceString = (subjectivityConfidence * 100).toFixed(2);
 
-    var responseTxt = "<p class='response-paragraph'> " + response.text + "</p><br>";
-    var sentimentPolarity = response.results[0].result.polarity
-    var sentenceArray = response.results[1].result.sentences
-    var sentimentIcon = ""
-    var sentimentColor = ""
+    var sentimentString = (polarity ? polarity[0].toUpperCase() + polarity.slice(1) + ` (${polarityConfidenceString}%)`: "");
+    sentimentString += (subjectivity != "unknown" ? subjectivity[0].toUpperCase() + subjectivity.slice(1) + ` (${subjectivityConfidenceString}%)`: "");
+    
 
     //Sets the poliarity icon and color classes.
-    if (sentimentPolarity === "negative") {
+    if (polarity) {
+      if (polarity === "negative") {
 
-      sentimentIcon = "remove"
-      sentimentColor = "red darken-4"
-    }
-    else if (sentimentPolarity === "positive") {
-
-      sentimentIcon = "add"
-      sentimentColor = "green darken-4"
-    }
-    else if (sentimentPolarity === "neutral") {
-
-      sentimentIcon = "pause"
-      sentimentColor = "yellow darken-1"
-    }
-    else {
-
-      sentimentIcon = ""
-      sentimentColor = "yellow darken-1"
-    }
-
-    //Concatenates the synopsis text.
-    for (let i = 0; i < sentenceArray.length; i++) {
-      responseTxt = responseTxt + "<p class='response-paragraph'> " + sentenceArray[i] + "</p><br>";
-
+        sentimentIcon = "remove"
+        sentimentColor = "red darken-4"
+      }
+      else if (polarity === "positive") {
+  
+        sentimentIcon = "add"
+        sentimentColor = "green darken-4"
+      }
+      else if (polarity === "neutral") {
+  
+        sentimentIcon = "pause"
+        sentimentColor = "yellow darken-1 black-text"
+      }
+      placeSentimentHere.html("<br><hr>" + "<div class='new badge " +
+        sentimentColor + "' data-badge-caption=''>" + sentimentString + "<i class='material-icons left'>"
+        + sentimentIcon + "</i></div>")
     }
 
+    placeSynopsisHere.html(sentenceArray.join(' ')); 
     //Used to set the html to the polarity and the summary.
-    placeSynopsisHere.html("<hr><br>" + responseTxt);
-    placeSentimentHere.html("<hr>" + "<a class='waves-effect waves-light btn sentiment-btn " +
-      sentimentColor + "'>Sentiment<i class='material-icons left'>"
-      + sentimentIcon + "</i></a> <br>")
+
 
   });
 
@@ -299,7 +297,7 @@ const renderMessage = (message_code) => {
   if (message_code === "SM1") {
     message_text = "The article synopsis has been copied to the clipboard!"
   }
-  else if (message_code = "SM2") {
+  else if (message_code === "SM2") {
     message_text = "Please click the synopsis button before pressing copy!"
   }
 
