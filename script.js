@@ -27,9 +27,6 @@ function renderTitles(articles) {
   var articleList = $("#headline-results");
   articleList.empty();
 
-  console.log(articles);
-
-
   for (let i = 0; i < articles.length; i++) {
 
     var articleTitle = articles[i].title;
