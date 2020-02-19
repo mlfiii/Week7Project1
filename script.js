@@ -20,6 +20,7 @@
 
 
 let previousArticleID = "";
+let previousSentID = "";
 
 function renderTitles(articles) {
 
@@ -154,11 +155,13 @@ $('#headline-results').on('click', '.article-btn', function () {
   if (previousArticleID !== "") {
 
     var previousArticleText = $("#" + previousArticleID)
+    var previousSentObject = $("#" + previousSentID)
 
     //If the previous article ID is not the same as the current article ID then empty the previous p tag.
     if (previousArticleID !== iamIn) {
 
       previousArticleText.empty()
+      previousSentObject.remove()
     }
   }
 
@@ -216,10 +219,11 @@ $('#headline-results').on('click', '.article-btn', function () {
       + sentimentIcon + "</i></a> <br>")
 
   });
-  console.log("Previous:", previousArticleID)
+
 
   previousArticleID = iamIn
-  console.log("Current:", previousArticleID)
+  previousSentID = iamSentID
+
 
 });
 
