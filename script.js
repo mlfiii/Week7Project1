@@ -206,7 +206,8 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     //Set the text variable.
 
-    var responseTxt = response.text;
+    var responseTxt = "<p class='response-paragraph'> " + response.text + "</p><br>";
+    console.log("responsetext1:", responseTxt)
     var sentimentPolarity = response.results[0].result.polarity
     var sentenceArray = response.results[1].result.sentences
     var sentimentIcon = ""
@@ -236,8 +237,8 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     //Concatenates the synopsis text.
     for (let i = 0; i < sentenceArray.length; i++) {
-
-      responseTxt = responseTxt + " " + sentenceArray[i];
+      console.log("responsetext2:", responseTxt)
+      responseTxt = responseTxt + "<p class='response-paragraph'> " + sentenceArray[i] + "</p><br>";
 
     }
 
