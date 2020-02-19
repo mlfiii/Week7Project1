@@ -19,7 +19,11 @@
 // getEverything("https://www.bbc.co.uk/sport/athletics/51511341");
 
 
+<<<<<<< HEAD
 let previousArticleID = "";
+=======
+const currentArticle = "";
+>>>>>>> 5522865ef5403c60ba373c1acc1d5f2fd961e94f
 
 function renderTitles(articles) {
 
@@ -32,7 +36,10 @@ function renderTitles(articles) {
     var articleTitle = articles[i].title;
     var articleImage = articles[i].urlToImage;
     var articleURL = articles[i].url;
+<<<<<<< HEAD
     var articleSource = articles[i].source.name
+=======
+>>>>>>> 5522865ef5403c60ba373c1acc1d5f2fd961e94f
     var articleID = i
 
     //These sets the vlaulues to blank in case there's something that isn't returned.
@@ -50,12 +57,6 @@ function renderTitles(articles) {
       articleURL = ""
 
     }
-
-    if (articleSource === null || articleSource === "null") {
-      articleSource = "Article/Video"
-
-    }
-
 
     //Create the HTML that creates the card.
 
@@ -75,7 +76,7 @@ function renderTitles(articles) {
       "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text'></p>" +
       "</div>" +
       "<div class='card-action'>" +
-      "<a href='" + articleURL + "' target='_blank'>" + "Source: <span class='source blue-text text-darken-4'>'" + articleSource + "'</span></a>" +
+      "<a href='" + articleURL + "' target='_blank'>Full Article</a>" +
       "</div>" +
       "</div>" +
       "</div>" +
@@ -150,19 +151,6 @@ $('#headline-results').on('click', '.article-btn', function () {
   var placeSynopsisHere = $("#" + iamIn);
   var placeSentimentHere = $("#" + iamSentID);
 
-  //Check the previous article id.  If it's not blank then go into if.
-  if (previousArticleID !== "") {
-
-    var previousArticleText = $("#" + previousArticleID)
-
-    //If the previous article ID is not the same as the current article ID then empty the previous p tag.
-    if (previousArticleID !== iamIn) {
-
-      previousArticleText.empty()
-    }
-  }
-
-
   //The url that was set when the titles are rendered onto page.
   var articleUrl = $(this).attr('article-url');
 
@@ -216,10 +204,6 @@ $('#headline-results').on('click', '.article-btn', function () {
       + sentimentIcon + "</i></a> <br>")
 
   });
-  console.log("Previous:", previousArticleID)
-
-  previousArticleID = iamIn
-  console.log("Current:", previousArticleID)
 
 });
 
