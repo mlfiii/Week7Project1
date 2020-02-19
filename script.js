@@ -51,6 +51,12 @@ function renderTitles(articles) {
 
     }
 
+    if (articleSource === null || articleSource === "null") {
+      articleSource = "Article/Video"
+
+    }
+
+
     //Create the HTML that creates the card.
 
     var cardtxt = "<div class='row'>" +
@@ -69,7 +75,7 @@ function renderTitles(articles) {
       "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text'></p>" +
       "</div>" +
       "<div class='card-action'>" +
-      "<a href='" + articleURL + "' target='_blank'>Full Article</a>" +
+      "<a href='" + articleURL + "' target='_blank'>" + "Source: <span class='source blue-text text-darken-4'>'" + articleSource + "'</span></a>" +
       "</div>" +
       "</div>" +
       "</div>" +
@@ -144,6 +150,19 @@ $('#headline-results').on('click', '.article-btn', function () {
   var placeSynopsisHere = $("#" + iamIn);
   var placeSentimentHere = $("#" + iamSentID);
 
+  //Check the previous article id.  If it's not blank then go into if.
+  if (previousArticleID !== "") {
+
+    var previousArticleText = $("#" + previousArticleID)
+
+    //If the previous article ID is not the same as the current article ID then empty the previous p tag.
+    if (previousArticleID !== iamIn) {
+
+      previousArticleText.empty()
+    }
+  }
+
+
   //The url that was set when the titles are rendered onto page.
   var articleUrl = $(this).attr('article-url');
 
@@ -197,6 +216,10 @@ $('#headline-results').on('click', '.article-btn', function () {
       + sentimentIcon + "</i></a> <br>")
 
   });
+  console.log("Previous:", previousArticleID)
+
+  previousArticleID = iamIn
+  console.log("Current:", previousArticleID)
 
 });
 
