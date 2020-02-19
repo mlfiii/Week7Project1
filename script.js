@@ -19,11 +19,7 @@
 // getEverything("https://www.bbc.co.uk/sport/athletics/51511341");
 
 
-<<<<<<< HEAD
 let previousArticleID = "";
-=======
-const currentArticle = "";
->>>>>>> 5522865ef5403c60ba373c1acc1d5f2fd961e94f
 
 function renderTitles(articles) {
 
@@ -36,10 +32,7 @@ function renderTitles(articles) {
     var articleTitle = articles[i].title;
     var articleImage = articles[i].urlToImage;
     var articleURL = articles[i].url;
-<<<<<<< HEAD
     var articleSource = articles[i].source.name
-=======
->>>>>>> 5522865ef5403c60ba373c1acc1d5f2fd961e94f
     var articleID = i
 
     //These sets the vlaulues to blank in case there's something that isn't returned.
