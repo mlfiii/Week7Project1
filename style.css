@@ -35,6 +35,8 @@ nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
 .no-shadows {
     box-shadow: none!important;
 }
+
+
 h1,h2, h3,span{
 
     font-family: 'Georgia', Times, 'Times New Roman', serif;
@@ -127,7 +129,5 @@ body {
 
     margin: 0px;
 }
-
-
 
 
