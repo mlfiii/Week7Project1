@@ -105,7 +105,7 @@ function renderTitles(articles) {
       "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text'></p>" +
       "</div>" +
       "<div class='card-action'>" +
-      "<a href='" + articleURL + "' target='_blank'>" + "Source: <span class='source blue-text text-darken-4'>'" + articleSource + "'</span></a>" +
+      "<a href='" + articleURL + "' target='_blank'><span class='black-text'>" + "Source:</span> <span class='source blue-text text-darken-4'>'" + articleSource + "'</span></a>" +
       "</div>" +
       "</div>" +
       "</div>" +
