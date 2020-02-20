@@ -174,6 +174,8 @@ $('#headline-results').on('click', '.article-btn', function () {
 
       previousArticleText.empty();
       previousSentObject.empty();
+    } else {
+      return;
     }
   }
 
