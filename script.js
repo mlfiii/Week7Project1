@@ -121,7 +121,6 @@ function renderTitles(articles) {
 
   }
 
-
 };
 
 const renderError = (error) => {
@@ -183,12 +182,11 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     var previousArticleText = $("#" + previousArticleID)
     var previousSentObject = $("#" + previousSentID)
-
     //If the previous article ID is not the same as the current article ID then empty the previous p tag.
     if (previousArticleID !== iamIn) {
 
       previousArticleText.empty()
-      previousSentObject.remove()
+      previousSentObject.empty()
     }
   }
 
