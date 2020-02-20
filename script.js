@@ -82,6 +82,7 @@ function renderTitles(articles) {
       "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
       "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i>Copy to Clipboard</a>" +
       "</div>" +
+      "<img class='hidden loading-wheel' src='./Images/loading-wheel.gif'>" +
       "<div id='sentiment-id-" + articleID + "' class='col s12'></div>" +
       "<p id='article-id-" + articleID + "' class='blue-text text-darken-4 article-text col s12'></p>" +
       "</div>" +
@@ -105,7 +106,6 @@ function renderTitles(articles) {
 
 const renderError = (error) => {
   console.error(error);
-  console.log({ error, error })
   const modal = $('#error-modal');
 
   const header = $('<h4>');
@@ -121,7 +121,7 @@ const renderError = (error) => {
 
 $("#searchbutton").click(function (event) {
 
-  toggleArticleLoading();
+  togglePageLoading();
 
   event.preventDefault();
   let input = $("#searchbox")
@@ -131,11 +131,11 @@ $("#searchbutton").click(function (event) {
   if (input) {
     getEverything({ q: input })
       .then(({ articles }) => {
-        toggleArticleLoading();
+        togglePageLoading();
         renderTitles(articles);
       })
       .catch(error => {
-        toggleArticleLoading();
+        togglePageLoading();
         renderError(error);
       })
   }
@@ -145,11 +145,11 @@ $(document).ready(function () {
   $('.modal').modal();
   getHeadlines({ country: 'us' })
     .then(({ articles }) => {
-      toggleArticleLoading();
+      togglePageLoading();
       renderTitles(articles);
     })
     .catch(error => {
-      toggleArticleLoading();
+      togglePageLoading();
       renderError(error);
     })
 });
@@ -161,6 +161,7 @@ $('#headline-results').on('click', '.article-btn', function () {
   //Pulls the ID of the p tag where the text shall be rendered to.
   var iamIn = $(this).attr('iam-in');
   var iamSentID = $(this).attr('sent-id');
+  var loadingWheel = $(this).parent().siblings('img.loading-wheel');
   var placeSentimentHere = $("#" + iamSentID);
 
   //Check the previous article id.  If it's not blank then go into if.
@@ -171,8 +172,8 @@ $('#headline-results').on('click', '.article-btn', function () {
     //If the previous article ID is not the same as the current article ID then empty the previous p tag.
     if (previousArticleID !== iamIn) {
 
-      previousArticleText.empty()
-      previousSentObject.empty()
+      previousArticleText.empty();
+      previousSentObject.empty();
     }
   }
 
@@ -183,6 +184,7 @@ $('#headline-results').on('click', '.article-btn', function () {
   //Creates the ID of where the text shall be placed.
   var placeSynopsisHere = $("#" + iamIn);
 
+  loadingWheel.toggleClass('hidden');
   //Initiates the analysis function.  Waits until a respoonse is returned.
   getAnalysis({ url: articleUrl }).then(function (response) {
 
@@ -224,9 +226,9 @@ $('#headline-results').on('click', '.article-btn', function () {
         + sentimentIcon + "</i></div>")
     }
 
+    loadingWheel.toggleClass('hidden');
     placeSynopsisHere.html(sentenceArray.join(' ')); 
     //Used to set the html to the polarity and the summary.
-
 
   });
 
@@ -304,7 +306,7 @@ const renderMessage = (message_code) => {
   }, 4000);
 };
 
-function toggleArticleLoading() {
+function togglePageLoading() {
   $('#main-loading-wheel').toggleClass('hidden');
   $('#main').toggleClass('hidden');
 }
