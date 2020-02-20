@@ -207,7 +207,6 @@ $('#headline-results').on('click', '.article-btn', function () {
     //Set the text variable.
 
     var responseTxt = "<p class='response-paragraph'> " + response.text + "</p><br>";
-
     var sentimentPolarity = response.results[0].result.polarity
     var sentenceArray = response.results[1].result.sentences
     var sentimentIcon = ""
