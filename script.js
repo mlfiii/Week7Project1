@@ -1,23 +1,3 @@
-// // test area --- not part of final product
-// getEverything({q: 'pole vault', source: 'CNN'}).then((response) => {
-//   const { articles } = response;
-
-//   // var articles = response.articles;
-//   const { url } = articles[0];
-
-//   // var url = articles[0].url;
-//   // console.log({ url, googleResponse: response })
-//   renderTitles(articles)
-
-//   return getAnalysis({ url });
-// }).then((response) => {
-//   console.log(response);
-// }).catch(error => {
-//   renderError(error);
-// });
-
-// getEverything("https://www.bbc.co.uk/sport/athletics/51511341");
-
 //Used to set what article  the user had previously clicked on and what is the corresponding sentiment.
 let previousArticleID = "";
 let previousSentID = "";
@@ -141,6 +121,8 @@ const renderError = (error) => {
 
 $("#searchbutton").click(function (event) {
 
+  toggleArticleLoading();
+
   event.preventDefault();
   let input = $("#searchbox")
     .val()
@@ -149,9 +131,11 @@ $("#searchbutton").click(function (event) {
   if (input) {
     getEverything({ q: input })
       .then(({ articles }) => {
+        toggleArticleLoading();
         renderTitles(articles);
       })
       .catch(error => {
+        toggleArticleLoading();
         renderError(error);
       })
   }
@@ -161,9 +145,11 @@ $(document).ready(function () {
   $('.modal').modal();
   getHeadlines({ country: 'us' })
     .then(({ articles }) => {
+      toggleArticleLoading();
       renderTitles(articles);
     })
     .catch(error => {
+      toggleArticleLoading();
       renderError(error);
     })
 });
@@ -279,7 +265,6 @@ $('#headline-results').on('click', '.copy-btn', function () {
 
 });
 
-
 //Function used to build messages for the user to acknowledge by clicking close.
 const renderMessage = (message_code) => {
 
@@ -319,3 +304,7 @@ const renderMessage = (message_code) => {
   }, 4000);
 };
 
+function toggleArticleLoading() {
+  $('#main-loading-wheel').toggleClass('hidden');
+  $('#main').toggleClass('hidden');
+}
