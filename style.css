@@ -4,7 +4,7 @@
     list-style: none;
     text-decoration: none;
     font-family: 'Times New Roman', Times, serif;
-}   
+}
 
 /* Used to override preset css */
 nav
@@ -38,7 +38,6 @@ nav .input-field {
 }
 
 h1, h2, h3, span {
-
     font-family: 'Georgia', Times, 'Times New Roman', serif;
     margin: 10px 0px 0px 0px;
 }
@@ -48,16 +47,13 @@ h4 {
 }
 
 h5{
-
     font-family: 'Georgia', Times, 'Times New Roman', serif;
     margin: 10px 0px 10px 10px;
 }
 
 hr{
-
     margin: 0px 0px 10px 0px;
     color: whitesmoke 2px;
-
 }
 
 .input-field i, .input-field label {
@@ -71,7 +67,6 @@ hr{
 
 /* label underline focus color */
 .input-field input[type=text] {
-
     border-bottom: 1px solid white!important;
     box-shadow: 0 1px 0 0 black!important;
   }
@@ -104,29 +99,22 @@ body {
 #searchbutton {
   background-color: #1e88e5;
   border: whitesmoke thin solid;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* border-radius: 5%;
-  margin: 10px 0px 0px 16px; */
-  /* line-height: 36px; */
 }
 
 #headline-results{
   color: white;
+  column-width: 25rem;
+  column-gap: 1rem;
 }
-/* 
-.row{
-    margin: 0px;
-} */
 
-/* .sentiment-btn, .article-btn, .copy-btn{
-
-  margin:10px 0px 10px 0px;
-} */
+div.card.hoverable {
+  display: inline-block;
+  width:  100%;
+}
 
 .article-text{
-
-    margin: 0px;
+  margin: 0px;
+  text-align: left;
 }
 
 .article-image {

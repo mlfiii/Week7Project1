@@ -91,11 +91,11 @@ function renderTitles(articles) {
 
     var cardtxt =
       "<div class='card hoverable'>" +
-      "<div class='card-content row'>" +
-      "<div class='col s12 m5'>" +
+      "<div class='card-image'>" +
       "<img class='article-image' src=" + articleImage + ">" +
       "</div>" +
-      "<div class='card-title blue-text text-darken-4 col s12 m7'>" + articleTitle + "</div>" +
+      "<div class='card-content row'>" +  
+      "<div class='card-title blue-text text-darken-4'>" + articleTitle + "</div>" +
       "<div class='col s12'>" +
       "<a class='waves-effect waves-light btn article-btn blue darken-4' article-url='" + articleURL +
       "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "'><i class='material-icons left'>textsms</i>Summary</a>  " +
@@ -111,7 +111,7 @@ function renderTitles(articles) {
       "</div>"
 
     //declare the div tag
-    var div = $("<div class='col s12 m6'>");
+    var div = $("<div>");
 
     //Set the div tag to the title of the article.
     div.html(cardtxt);
