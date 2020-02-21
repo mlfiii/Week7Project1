@@ -134,3 +134,10 @@ div.card.hoverable {
 .article-image {
   width: 100%;
 }
+
+
+.collection .collection-item:last-child {
+
+  color: white;
+  padding: 5px;
+}

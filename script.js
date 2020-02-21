@@ -200,9 +200,11 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     var responseTxt = "<br><br>";
     var sentimentPolarity = response.results[0].result.polarity
+    var sentimentPolarityConfidence = ((response.results[0].result.polarity_confidence) * 100).toFixed(2) + '%'
     var sentenceArray = response.results[1].result.sentences
     var sentimentIcon = ""
     var sentimentColor = ""
+
 
     //Sets the poliarity icon and color classes.
     if (sentimentPolarity === "negative") {
@@ -218,7 +220,7 @@ $('#headline-results').on('click', '.article-btn', function () {
     else if (sentimentPolarity === "neutral") {
 
       sentimentIcon = "pause"
-      sentimentColor = "yellow darken-1"
+      sentimentColor = "yellow darken-1 black-text"
     }
     else {
 
@@ -228,9 +230,11 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     if (sentenceArray.length === 0) {
 
+
       responseTxt = responseTxt + "<p class='response-paragraph'>Synopsis not available.</p><br>";
 
     }
+
     //MLF: COMMENTED SINCE THE .JOIN METHOD IS BEING USED.
     // for (let i = 0; i < sentenceArray.length; i++) {
 
@@ -244,9 +248,25 @@ $('#headline-results').on('click', '.article-btn', function () {
     currentCopyBtn.toggleClass('hidden');
 
     //Added in breaks to separate the sentences since they are more like paragraphs.  Helps readability.
-    placeSynopsisHere.html(sentenceArray.join(' <br><br>'));
 
-    //Used to set the html to the polarity and the summary.
+    //If statement handles if the synopsis array is zero length.
+
+    if (sentenceArray.length === 0) {
+
+      responseTxt = responseTxt + "<p class='response-paragraph red-text text-darken-4'>Synopsis not available.</p><br>";
+      placeSynopsisHere.html(responseTxt);
+
+
+    } else {
+
+      placeSynopsisHere.html(sentenceArray.join(' <br><br>'))
+      placeSentimentHere.html('<hr><div class="collection"> ' +
+        '<a href="#!" class="collection-item ' + sentimentColor + '"><i class="material-icons sent-icon">' + sentimentIcon + '</i>' + sentimentPolarity.toUpperCase() + ' (' + sentimentPolarityConfidence + ')</a>' +
+        '</div>')
+
+    };
+
+
 
   });
 
