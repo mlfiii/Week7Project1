@@ -1,6 +1,7 @@
 //Used to set what article  the user had previously clicked on and what is the corresponding sentiment.
 let previousArticleID = "";
 let previousSentID = "";
+let previousCopyBtn = "";
 
 function renderTitles(articles) {
 
@@ -74,12 +75,12 @@ function renderTitles(articles) {
       "<div class='card-image'>" +
       "<img class='article-image' src=" + articleImage + ">" +
       "</div>" +
-      "<div class='card-content row'>" +  
+      "<div class='card-content row'>" +
       "<div class='card-title blue-text text-darken-4'>" + articleTitle + "</div>" +
       "<div class='col s12'>" +
       "<a class='waves-effect waves-light btn article-btn blue darken-4' article-url='" + articleURL +
-      "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "'><i class='material-icons left'>textsms</i>Summary</a>  " +
-      "<a class='waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
+      "' iam-in='article-id-" + articleID + "' sent-id='sentiment-id-" + articleID + "' copy-id='copy-id-" + articleID + "'><i class='material-icons left'>textsms</i>Summary</a>  " +
+      "<a id='copy-id-" + articleID + "'class='hidden waves-effect waves-light btn copy-btn blue darken-4' article-url='" + articleURL +
       "' iam-in='article-id-" + articleID + "'><i class='material-icons left'>content_copy</i>Copy to Clipboard</a>" +
       "</div>" +
       "<img class='hidden loading-wheel' src='./Images/loading-wheel.gif'>" +
@@ -161,19 +162,24 @@ $('#headline-results').on('click', '.article-btn', function () {
   //Pulls the ID of the p tag where the text shall be rendered to.
   var iamIn = $(this).attr('iam-in');
   var iamSentID = $(this).attr('sent-id');
+  var iamCopyID = $(this).attr('copy-id');
   var loadingWheel = $(this).parent().siblings('img.loading-wheel');
   var placeSentimentHere = $("#" + iamSentID);
+  var currentCopyBtn = $("#" + iamCopyID)
 
   //Check the previous article id.  If it's not blank then go into if.
   if (previousArticleID !== "") {
 
     var previousArticleText = $("#" + previousArticleID)
     var previousSentObject = $("#" + previousSentID)
+    var previousCopyObject = $("#" + previousCopyBtn)
+
     //If the previous article ID is not the same as the current article ID then empty the previous p tag.
     if (previousArticleID !== iamIn) {
 
       previousArticleText.empty();
       previousSentObject.empty();
+      previousCopyObject.toggleClass('hidden')
     } else {
       return;
     }
@@ -191,52 +197,53 @@ $('#headline-results').on('click', '.article-btn', function () {
   getAnalysis({ url: articleUrl }).then(function (response) {
 
     //Set the text variable.
-    var polarity = response.results[0].result.polarity;
-    var polarityConfidence = response.results[0].result.polarity_confidence;
-    var subjectivity = response.results[0].result.subjectivity;
-    var subjectivityConfidence = response.results[0].result.subjectivity_confidence;
-    var sentenceArray = response.results[1].result.sentences;
-    var sentimentIcon = "";
-    var sentimentColor = "";
-    
-    polarityConfidenceString = (polarityConfidence * 100).toFixed(2);
-    subjectivityConfidenceString = (subjectivityConfidence * 100).toFixed(2);
 
-    var sentimentString = (polarity ? polarity[0].toUpperCase() + polarity.slice(1) + ` (${polarityConfidenceString}%)`: "");
-    sentimentString += (subjectivity != "unknown" ? subjectivity[0].toUpperCase() + subjectivity.slice(1) + ` (${subjectivityConfidenceString}%)`: "");
-    
+    var responseTxt = "";
+    var sentimentPolarity = response.results[0].result.polarity
+    var sentenceArray = response.results[1].result.sentences
+    var sentimentIcon = ""
+    var sentimentColor = ""
 
     //Sets the poliarity icon and color classes.
-    if (polarity) {
-      if (polarity === "negative") {
+    if (sentimentPolarity === "negative") {
 
-        sentimentIcon = "remove"
-        sentimentColor = "red darken-4"
-      }
-      else if (polarity === "positive") {
-  
-        sentimentIcon = "add"
-        sentimentColor = "green darken-4"
-      }
-      else if (polarity === "neutral") {
-  
-        sentimentIcon = "pause"
-        sentimentColor = "yellow darken-1 black-text"
-      }
-      placeSentimentHere.html("<br><hr>" + "<div class='new badge " +
-        sentimentColor + "' data-badge-caption=''>" + sentimentString + "<i class='material-icons left'>"
-        + sentimentIcon + "</i></div>")
+      sentimentIcon = "remove"
+      sentimentColor = "red darken-4"
+    }
+    else if (sentimentPolarity === "positive") {
+
+      sentimentIcon = "add"
+      sentimentColor = "green darken-4"
+    }
+    else if (sentimentPolarity === "neutral") {
+
+      sentimentIcon = "pause"
+      sentimentColor = "yellow darken-1"
+    }
+    else {
+
+      sentimentIcon = ""
+      sentimentColor = "yellow darken-1"
+    }
+
+
+    //Concatenates the synopsis text.
+    for (let i = 0; i < sentenceArray.length; i++) {
+      responseTxt = responseTxt + "<p class='response-paragraph'> " + sentenceArray[i] + "</p><br>";
+
     }
 
     loadingWheel.toggleClass('hidden');
-    placeSynopsisHere.html(sentenceArray.join(' ')); 
+    currentCopyBtn.toggleClass('hidden');
+    placeSynopsisHere.html(sentenceArray.join(' '));
     //Used to set the html to the polarity and the summary.
 
   });
 
 
-  previousArticleID = iamIn
-  previousSentID = iamSentID
+  previousArticleID = iamIn;
+  previousSentID = iamSentID;
+  previousCopyBtn = iamCopyID;
 
 
 });
