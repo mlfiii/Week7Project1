@@ -198,7 +198,7 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     //Set the text variable.
 
-    var responseTxt = "";
+    var responseTxt = "<br><br>";
     var sentimentPolarity = response.results[0].result.polarity
     var sentenceArray = response.results[1].result.sentences
     var sentimentIcon = ""
@@ -226,16 +226,26 @@ $('#headline-results').on('click', '.article-btn', function () {
       sentimentColor = "yellow darken-1"
     }
 
+    if (sentenceArray.length === 0) {
 
-    //Concatenates the synopsis text.
-    for (let i = 0; i < sentenceArray.length; i++) {
-      responseTxt = responseTxt + "<p class='response-paragraph'> " + sentenceArray[i] + "</p><br>";
+      responseTxt = responseTxt + "<p class='response-paragraph'>Synopsis not available.</p><br>";
 
     }
+    //MLF: COMMENTED SINCE THE .JOIN METHOD IS BEING USED.
+    // for (let i = 0; i < sentenceArray.length; i++) {
+
+    //   responseTxt = responseTxt + "<p class='response-paragraph'> " + sentenceArray[i] + "</p><br>";
+
+    // }
+
+
 
     loadingWheel.toggleClass('hidden');
     currentCopyBtn.toggleClass('hidden');
-    placeSynopsisHere.html(sentenceArray.join(' '));
+
+    //Added in breaks to separate the sentences since they are more like paragraphs.  Helps readability.
+    placeSynopsisHere.html(sentenceArray.join(' <br><br>'));
+
     //Used to set the html to the polarity and the summary.
 
   });
@@ -254,6 +264,7 @@ $('#headline-results').on('click', '.copy-btn', function () {
   //Setup the objects that are used to copy the text
   const copiedFromTextArea = $(this).attr('iam-in');
   const textarea = document.createElement("textarea");
+  const copiedmessage = document.createElement("copytextarea");
   const textToCopy = $("#" + copiedFromTextArea).text();
 
 
@@ -272,7 +283,7 @@ $('#headline-results').on('click', '.copy-btn', function () {
   textarea.remove();
 
   //Alert user that the synopsis has been copied to clipboard.
-  renderMessage("SM1");
+  // renderMessage("SM1");
 
 });
 
