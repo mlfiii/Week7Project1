@@ -228,7 +228,12 @@ $('#headline-results').on('click', '.article-btn', function () {
       sentimentColor = "yellow darken-1"
     }
 
+    if (sentenceArray.length === 0) {
 
+
+      responseTxt = responseTxt + "<p class='response-paragraph'>Synopsis not available.</p><br>";
+
+    }
 
     //MLF: COMMENTED SINCE THE .JOIN METHOD IS BEING USED.
     // for (let i = 0; i < sentenceArray.length; i++) {
@@ -243,6 +248,7 @@ $('#headline-results').on('click', '.article-btn', function () {
     currentCopyBtn.toggleClass('hidden');
 
     //Added in breaks to separate the sentences since they are more like paragraphs.  Helps readability.
+
     //If statement handles if the synopsis array is zero length.
 
     if (sentenceArray.length === 0) {
@@ -259,6 +265,7 @@ $('#headline-results').on('click', '.article-btn', function () {
         '</div>')
 
     };
+
 
 
   });
