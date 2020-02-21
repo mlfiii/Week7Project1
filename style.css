@@ -24,6 +24,11 @@ nav .input-field {
 .hidden {
   display: none!important;
 }
+
+.copy-btn{
+
+  margin: 10px 0px;
+}
 /* 
 #site-name{
     font-size: 22.5px; 
