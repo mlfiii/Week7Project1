@@ -200,9 +200,11 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     var responseTxt = "<br><br>";
     var sentimentPolarity = response.results[0].result.polarity
+    var sentimentPolarityConfidence = ((response.results[0].result.polarity_confidence) * 100).toFixed(2) + '%'
     var sentenceArray = response.results[1].result.sentences
     var sentimentIcon = ""
     var sentimentColor = ""
+
 
     //Sets the poliarity icon and color classes.
     if (sentimentPolarity === "negative") {
@@ -218,13 +220,14 @@ $('#headline-results').on('click', '.article-btn', function () {
     else if (sentimentPolarity === "neutral") {
 
       sentimentIcon = "pause"
-      sentimentColor = "yellow darken-1"
+      sentimentColor = "yellow darken-1 black-text"
     }
     else {
 
       sentimentIcon = ""
       sentimentColor = "yellow darken-1"
     }
+
 
 
     //MLF: COMMENTED SINCE THE .JOIN METHOD IS BEING USED.
@@ -248,7 +251,14 @@ $('#headline-results').on('click', '.article-btn', function () {
       placeSynopsisHere.html(responseTxt);
 
 
-    } else { placeSynopsisHere.html(sentenceArray.join(' <br><br>')) };
+    } else {
+
+      placeSynopsisHere.html(sentenceArray.join(' <br><br>'))
+      placeSentimentHere.html('<hr><div class="collection"> ' +
+        '<a href="#!" class="collection-item ' + sentimentColor + '"><i class="material-icons sent-icon">' + sentimentIcon + '</i>' + sentimentPolarity.toUpperCase() + ' (' + sentimentPolarityConfidence + ')</a>' +
+        '</div>')
+
+    };
 
 
   });
