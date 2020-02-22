@@ -7,7 +7,7 @@ A simple, news application that provides summaries and sentiment analysis of art
 
 ## How to Play
 
-You can find the application hosted by GitHub pages [here](https://millernj.github.io/weather-dashboard/). You can search for articles by keywords using the search bar on the top right. Each article has its source shown on the bottom of its card and clicking on the source will take you to the original webpage of the article. 
+You can find the application hosted by GitHub pages [here](https://mlfiii.github.io/Week7Project1/). You can search for articles by keywords using the search bar on the top right. Each article has its source shown on the bottom of its card and clicking on the source will take you to the original webpage of the article. 
 
 ![a demo image of one article from the news stand application](./Images/demo-article-card.png)
 
