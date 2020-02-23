@@ -228,12 +228,6 @@ $('#headline-results').on('click', '.article-btn', function () {
       sentimentColor = "yellow darken-1"
     }
 
-    if (sentenceArray.length === 0) {
-
-
-      responseTxt = responseTxt + "<p class='response-paragraph'>Synopsis not available.</p><br>";
-
-    }
 
     //MLF: COMMENTED SINCE THE .JOIN METHOD IS BEING USED.
     // for (let i = 0; i < sentenceArray.length; i++) {
