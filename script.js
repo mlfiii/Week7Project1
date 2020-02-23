@@ -247,7 +247,7 @@ $('#headline-results').on('click', '.article-btn', function () {
 
     if (sentenceArray.length === 0) {
 
-      responseTxt = responseTxt + "<p class='response-paragraph red-text text-darken-4'>Synopsis not available.</p><br>";
+      responseTxt = responseTxt + "<p class='response-paragraph red-text text-darken-4'>Summary not available.</p><br>";
       placeSynopsisHere.html(responseTxt);
 
 
