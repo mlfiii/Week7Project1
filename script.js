@@ -237,13 +237,11 @@ $('#headline-results').on('click', '.article-btn', function () {
     // }
 
 
-
+    //Stop the display of toggle wheel since display would be complete.
     loadingWheel.toggleClass('hidden');
-    currentCopyBtn.toggleClass('hidden');
 
-    //Added in breaks to separate the sentences since they are more like paragraphs.  Helps readability.
 
-    //If statement handles if the synopsis array is zero length.
+    //If statement handles when the synopsis array is zero length.
 
     if (sentenceArray.length === 0) {
 
@@ -252,11 +250,14 @@ $('#headline-results').on('click', '.article-btn', function () {
 
 
     } else {
+      //Added in breaks to separate the sentences since they are more like paragraphs.  Helps readability.
 
       placeSynopsisHere.html(sentenceArray.join(' <br><br>'))
       placeSentimentHere.html('<hr><div class="collection"> ' +
         '<a href="#!" class="collection-item ' + sentimentColor + '"><i class="material-icons sent-icon">' + sentimentIcon + '</i>' + sentimentPolarity.toUpperCase() + ' (' + sentimentPolarityConfidence + ')</a>' +
         '</div>')
+      //Start the display of copy button since display is complete and the length of array is greater than zero.
+      currentCopyBtn.toggleClass('hidden');
 
     };
 
