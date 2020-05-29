@@ -249,6 +249,7 @@ $('#headline-results').on('click', '.article-btn', function () {
 
       responseTxt = responseTxt + "<p class='response-paragraph red-text text-darken-4'>Summary not available.</p><br>";
       placeSynopsisHere.html(responseTxt);
+      currentCopyBtn.toggleClass('hidden');
 
 
     } else {
@@ -257,6 +258,9 @@ $('#headline-results').on('click', '.article-btn', function () {
       placeSentimentHere.html('<hr><div class="collection"> ' +
         '<a href="#!" class="collection-item ' + sentimentColor + '"><i class="material-icons sent-icon">' + sentimentIcon + '</i>' + sentimentPolarity.toUpperCase() + ' (' + sentimentPolarityConfidence + ')</a>' +
         '</div>')
+      //Start the display of copy button since display is complete and the length of array is greater than zero.
+      // currentCopyBtn.toggleClass('hidden');
+
 
     };
 

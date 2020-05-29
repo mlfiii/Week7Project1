@@ -1,15 +1,15 @@
 const buildParamString = (params) => {
-  let paramList = Object.entries(params).map(([ key, value ]) => `${key}=${value}`);
+  let paramList = Object.entries(params).map(([key, value]) => `${key}=${value}`);
   return paramList.join('&');
 }
 
 const getHeadlines = (params) => {
 
-  const apiKey = '19a918446d7447a9b93c6157cfbc5140';
+  const apiKey = '94448685ef3d48b09a48eb0d89960574'// '19a918446d7447a9b93c6157cfbc5140';
 
-  let url = 'https://newsapi.org/v2/top-headlines?';
+  let url = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?';
   url += buildParamString(params);
-  
+
   const settings = {
     url,
     method: 'GET',
@@ -23,11 +23,11 @@ const getHeadlines = (params) => {
 
 const getEverything = (params) => {
 
-  const apiKey = '19a918446d7447a9b93c6157cfbc5140';
+  const apiKey = '94448685ef3d48b09a48eb0d89960574'//'19a918446d7447a9b93c6157cfbc5140';
 
-  let url = 'https://newsapi.org/v2/everything?';
+  let url = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?';
   url += buildParamString(params);
-  
+
   const settings = {
     url,
     method: 'GET',
